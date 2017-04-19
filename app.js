@@ -5,10 +5,7 @@
 
 // yeah i don't even need the constructor to generate pictures... something for resubmit!
 
-var imageArray = [
-  new Image('sldfkjdls'),
-
-];
+var imageArray = [];
 
 
 function Image(folder, name, filetype) {
@@ -48,6 +45,7 @@ Image.prototype.noDuplicator = function() {
     this.randomArrayIndex(),
     this.randomArrayIndex(),
   ];
+};
 
 
   // this.randomImageRetriever = function() {
@@ -121,11 +119,33 @@ function noDuplicate() {
   chosenArray.push(image2);
   chosenArray.push(image3);
 
-  if(image1==image2 || image1==image3 || image2==image3) {
+  //if(image1==image2 || image1==image3 || image2==image3) {
 
-  }
+  //}
 }
 
-// createImage(imageArray[randomNumber()]);
-// createImage(imageArray[randomNumber()]);
-// createImage(imageArray[randomNumber()]);
+
+// Tuesday's lab...
+
+var ctx = document.getElementById('barchart').getContext('2d');
+
+var data = {
+  datasets: [{
+    data: [
+    // this will be click values!
+    ],
+    backgroundColor: [
+    // this will be different colors, matching up with the data property above
+    ],
+    label: 'clicks per item'
+  }],
+  labels: [
+  //image names...
+  ]
+};
+
+var barChart = new Chart(ctx, {
+  data: data,
+  type: 'bar',
+  // options: I will refer to manual considering options...
+});
