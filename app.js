@@ -5,127 +5,155 @@
 
 // yeah i don't even need the constructor to generate pictures... something for resubmit!
 
-var imageArray = [
-  new Image('sldfkjdls'),
-
-];
-
+//**************
+// var imageArray = [
+//   new Image('img/','bag',''),
+//   new Image('img/','banana','.jpg'),
+//   new Image('img/','bathroom','.jpg'),
+//   new Image('img/','boots','.jpg'),
+//   new Image('img/','breakfast','.jpg'),
+//   new Image('img/','bubblegum','.jpg'),
+//   new Image('img/','chair','.jpg'),
+//   new Image('img/','cthulhu','.jpg'),
+//   new Image('img/','dog-duck','.jpg'),
+//   new Image('img/','dragon','.jpg'),
+//   new Image('img/','pen','.jpg'),
+//   new Image('img/','pet-sweep','.jpg'),
+//   new Image('img/','scissors','.jpg'),
+//   new Image('img/','shark','.jpg'),
+//   new Image('img/','sweep','.png'),
+//   new Image('img/','tauntaun','.jpg'),
+//   new Image('img/','unicorn','.jpg'),
+//   new Image('img/','usb','.gif'),
+//   new Image('img/','water-can','.jpg'),
+//   new Image('img/','wine-glass','.jpg'),
+// ];
 
 function Image(folder, name, filetype) {
+  //this.shownPercent ??
   this.clickCount = 0;
   this.showCount = 0;
-  this.fileName= folder+name+'/'+filetype;
+  this.fileName= folder+name+filetype;
+}
+
+
+//**************
+var images = [
+  new Image('img/','bag','.jpg'),
+  new Image('img/','banana','.jpg'),
+  new Image('img/','bathroom','.jpg'),
+  new Image('img/','boots','.jpg'),
+  new Image('img/','breakfast','.jpg'),
+  new Image('img/','bubblegum','.jpg'),
+  new Image('img/','chair','.jpg'),
+  new Image('img/','cthulhu','.jpg'),
+  new Image('img/','dog-duck','.jpg'),
+  new Image('img/','dragon','.jpg'),
+  new Image('img/','pen','.jpg'),
+  new Image('img/','pet-sweep','.jpg'),
+  new Image('img/','scissors','.jpg'),
+  new Image('img/','shark','.jpg'),
+  new Image('img/','sweep','.png'),
+  new Image('img/','tauntaun','.jpg'),
+  new Image('img/','unicorn','.jpg'),
+  new Image('img/','usb','.gif'),
+  new Image('img/','water-can','.jpg'),
+  new Image('img/','wine-glass','.jpg'),
+];
   // this.appendImage = function() {
   //   imageArray.push(this.fileName);
   // };
-  imageArray.push(this)
-  //I am just appending the filename to a global array, to use elswhere...
-  this.appendImage();
 
-  this.randomArrayIndex= function() {
-    return Math.floor(Math.random()*(imageArray.length));
-  };
+function randomNum() {
+  return Math.floor(Math.random()*(images.length));
+}
   //* Using Durstenfeld shuffle algorithm...
-  this.noDuplicator = function() {
-    var noDup = [
-      this.randomArrayIndex(),
-      this.randomArrayIndex(),
-      this.randomArrayIndex(),
-    ];
-
-    for (var i=0; i <noDupArray.length; i++) {
-      while (number1==noDupArray[i]) {
-        var number1 = this.randomArrayIndex();
-      }
-
-    }
-  };
+function randomIndex() {
+  return Math.floor(Math.random()*(randomArray.length-3)+3);
 }
 
-Image.prototype.noDuplicator = function() {
-  var noDup = [
-    this.randomArrayIndex(),
-    this.randomArrayIndex(),
-    this.randomArrayIndex(),
-  ];
-
-
-  // this.randomImageRetriever = function() {
-  //   return imageArray[this.randomArrayIndex()];
-  // };
-    // this.randomImageRetriever();
-    // this.randomImageRetriever();
-
-  // this.createImage= function() {
-  //   var table = document.getElementById('app');
-  //   var ul = document.createElement('ul');
-  //   var tr = document.createElement('tr');
-  //   ul.setAttribute('id','title');
-  //   ul.appendChild(tr);
-  //   var image1 = document.createElement('img');
-  //   image1.textContent = imageArray[randomNumber()];
-  //   var imageResult = image1.setAttribute('src',imageArray[randomNumber()]);
-  //   image1.setAttribute('class','images');
-  //   tr.appendChild(image1);
-  //   ul.appendChild(tr);
-  //   table.appendChild(ul);
-  // };
-  // this.noDuplicator = function() {
-  //
-  // };
-
-// ['img/bag.jpg','img/banana.jpg','img/bathroom.jpg','img/boots.jpg','img/breakfast.jpg','img/bubblegum.jpg','img/chair.jpg','img/cthulhu.jpg','img/dog-duck.jpg','img/dragon.jpg','img/pen.jpg','img/pet-sweep.jpg','img/scissors.jpg','img/shark.jpg','img/sweep.png','img/tauntaun.jpg','img/unicorn.jpg','img/usb.gif','img/water-can.jpg','img/wine-glass.jpg'];
-var banana = new Image('img/','banana', '.jpg');
-var bathroom = new Image('img/','bag','.jpg');
-var breakfast = new Image('img/','breakfast','.jpg');
-var wine = new Image('img/','wine-glass','.jpg');
-
-
-// I wanted to create this method to use the constructor... instead of having to type out the images... something for resubmit...
-// Image.prototype.appendImage = function() {
-//   for (var i=0; i <this.imageArray.length; i++) {
-//     this.imageArray.push(this.fileName);
-//   }
-//   return this.imageArray;
-// };
-
-function randomNumber() {
-  return Math.floor(Math.random()*(imageArray.length)-1);
-}
-
-//duncan used splicce/concat... pretty cool!
-
-function createImage() {
-
-  var table = document.getElementById('app');
-  var ul = document.createElement('ul');
-  var tr = document.createElement('tr');
-  ul.setAttribute('id','title');
-  ul.appendChild(tr);
-  var image1 = document.createElement('img');
-  image1.textContent = imageArray[randomNumber()];
-  var image = image1.setAttribute('src',imageArray[randomNumber()]);
-  image1.setAttribute('class','images');
-  tr.appendChild(image1);
-  ul.appendChild(tr);
-  table.appendChild(ul);
-}
-
-
-function noDuplicate() {
-  var chosenArray = [];
-  var image1 =createImage(imageArray[randomNumber()]);
-  var image2 = createImage(imageArray[randomNumber()]);
-  var image3 = createImage(imageArray[randomNumber()]);
-  chosenArray.push(image1);
-  chosenArray.push(image2);
-  chosenArray.push(image3);
-
-  if(image1==image2 || image1==image3 || image2==image3) {
-
+var randomArray = [];
+function randomArrayGenerator() {
+  for (var i = images.length; i >0; i--) {
+    var popped = images.splice(randomNum(), 1);
+    randomArray.push(popped[0]);
   }
 }
 
-// createImage(imageArray[randomNumber()]);
-// createImage(imageArray[randomNumber()]);
-// createImage(imageArray[randomNumber()]);
+
+var previous = [];
+var secondToLast = [];
+
+function threeRandomPhotos() {
+  randomArrayGenerator();
+  secondToLast = previous;
+  previous = current;
+  var current = [];
+
+  // randomArray.push(current);
+  // randomArray.push(previous);
+  var nextimage = randomArray.pop();
+  console.log(randomArray.length);
+  current.push(nextimage);
+
+
+  nextimage = randomArray.pop();
+  current.push(nextimage);
+  console.log(randomArray.length);
+
+  nextimage = randomArray.pop();
+  current.push(nextimage);
+  console.log(randomArray.length);
+  randomArray= randomArray.concat(current);
+  console.log(randomArray);
+  return current;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function createImages() {
+  var current = threeRandomPhotos();
+  var app = document.getElementById('app');
+
+  for (var i =0; i<current.length; i++) {
+    var div = document.createElement('div');
+    var img = document.createElement('img');
+    div.setAttribute('class','images');
+    img.setAttribute('src', current[i].fileName);
+    img.setAttribute('class','images');
+    div.appendChild(img);
+    app.appendChild(div);
+  }
+}
+
+createImages();
+
+// function handleClickCounter(event) {
+//
+// }
+
+
+// // createImage(imageArray[randomNumber()]);
+// // createImage(imageArray[randomNumber()]);
+// // createImage(imageArray[randomNumber()]);
