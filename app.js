@@ -12,7 +12,7 @@ function Image(folder, name, filetype) {
 
 var previous = [];
 var current = [];
-var totalClicks = 0;
+var totalClicks = 24;
 
 //**************
 var images = [
@@ -96,6 +96,35 @@ function imageClicker(event) {
   }
 }
 
+function showChart() {
+  var app = document.getElementById('app');
+  var canvas = document.createElement('canvas');
+  canvas.width = '960';
+  canvas.height = '500';
+  app.appendChild(canvas);
+
+  var ctx = canvas.getContext('2d');
+  ctx.fillRect(0,0,50,50);
+
+  // var data = {
+  //   datasets: [{
+  //     data: [
+  //     // this will be click values!
+  //     ],
+  //     backgroundColor: [
+     // this will be different colors, matching up with the data property above
+  //     ],
+  //     label: 'clicks per item'
+  //   }],
+  //   labels: [
+  //   //image names...
+  //   ]
+  // };
+
+
+
+}
+
 
 
 var app= document.getElementById('app');
@@ -119,12 +148,6 @@ function createImages() {
     // app.appendChild(img);
   }
 }
-
-function showChart() {
-
-}
-
-// var canvas = document.getElementById('');
 
 // var data = {
 //   datasets: [{
@@ -163,7 +186,7 @@ for(var i=0; i < imgArray.length; i++){
 
 // Tuesday's lab...
 
-var ctx = document.getElementById('barchart').getContext('2d');
+// var ctx = document.getElementById('').getContext('2d');
 
 var data = {
   datasets: [{
@@ -180,8 +203,8 @@ var data = {
   ]
 };
 
-var barChart = new Chart(ctx, {
-  data: data,
-  type: 'bar',
-  // options: I will refer to manual considering options...
-});
+// var barChart = new Chart(ctx, {
+//   data: data,
+//   type: 'bar',
+//   // options: I will refer to manual considering options...
+// });
