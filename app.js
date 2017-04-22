@@ -158,7 +158,7 @@ for(var i=0; i < imgArray.length; i++){
   //if(image1==image2 || image1==image3 || image2==image3) {
 
   //}
-}
+
 
 
 // Tuesday's lab...
