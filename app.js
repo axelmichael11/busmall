@@ -84,8 +84,13 @@ function imageClicker(event) {
   var currentIndex = event.target.getAttribute('Current-Image-Index');
   current[currentIndex].clickCount++;
   console.log(current[currentIndex]);
-
-  createImages();
+  var app = document.getElementById('app');
+  if (totalClicks===25) {
+    app.textContent = '';
+    showChart();
+  } else {
+    createImages();
+  }
 }
 
 
