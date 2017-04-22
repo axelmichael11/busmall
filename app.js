@@ -48,21 +48,24 @@ function randomNum() {
 
 var randomArray = [];
 function randomArrayGenerator() {
-  for (var i = images.length; i >0; i--) {
+  for (var i = 3 ; i >0; i--) {
     var popped = images.splice(randomNum(), 1);
     randomArray.push(popped[0]);
   }
+  console.log(randomArray);
 }
 
 
 
-var current = [];
 var previous = [];
+// var secondToLast = [];
+var current = [];
 
 function threeRandomPhotos() {
   randomArrayGenerator();
-  var previous = current;
-
+  // secondToLast = previous;
+  previous = current;
+  current = [];
   // randomArray.push(current);
   // randomArray.push(previous);
   var nextimage = randomArray.pop();
@@ -77,7 +80,8 @@ function threeRandomPhotos() {
   nextimage = randomArray.pop();
   current.push(nextimage);
   // console.log(randomArray.length);
-  randomArray= randomArray.concat(current);
+  images = images.concat(previous);
+  console.log('images',images.length,"previous",previous);
   // console.log(randomArray);
   return current;
 }
@@ -87,37 +91,38 @@ function threeRandomPhotos() {
 function imageClicker(event) {
   console.log(event.target);
   totalClicks++;
-  var img = document.createElement('img');
   console.log(totalClicks);
-  var currentIndex = img.getAttribute('Current-Image-Index');
+  var currentIndex = event.target.getAttribute('Current-Image-Index');
   current[currentIndex].clickCount++;
   console.log(current[currentIndex].clickCount);
+
   createImages();
 }
 
 
+var app= document.getElementById('app');
+
 function createImages() {
   var current = threeRandomPhotos();
-  var app = document.getElementById('app');
-  var img = document.createElement('img');
-  console.log(current);
+  console.log('current',current);
+  // app.textContent= '';
   for (var i =0; i<3; i++) {
-    img.setAttribute('class','images');
-    console.log(img);
-    img.setAttribute('src', current[i].fileName);
-    img.setAttribute('Current-Image-Index', i);
+    var imgArray = document.getElementsByClassName('images');
+    // var img = document.createElement('img');
+    imgArray[i].setAttribute('class','images');
+    imgArray[i].src = current[i].fileName;
+    imgArray[i].setAttribute('Current-Image-Index', i);
     current[i].showCount++;
-    console.log(current[i].showCount);
-    console.log(current[i].clickCount);
+    // console.log('showcount'+current[i].showCount);
+    // console.log('clickcount'+current[i].clickCount);
 
-    app.appendChild(img);
-    console.log(img);
+    // app.appendChild(img);
   }
 }
 
-// function showChart() {
-  // SHOW YOURSELF
-// }
+function showChart() {
+
+}
 
 // var canvas = document.getElementById('');
 
@@ -127,7 +132,7 @@ function createImages() {
 //     // this will be click values!
 //     ],
 //     backgroundColor: [
-//     // this will be different colors, matching up with the data property above
+   // this will be different colors, matching up with the data property above
 //     ],
 //     label: 'clicks per item'
 //   }],
@@ -143,6 +148,10 @@ function createImages() {
 //   });
 
 createImages();
-var img = document.getElementsByClassName('images');
-console.log(img);
-img.addEventListener('click', imageClicker);
+
+
+var imgArray = document.getElementsByClassName('images');
+for(var i=0; i < imgArray.length; i++){
+  console.log(imgArray);
+  imgArray[i].addEventListener('click', imageClicker);
+}
