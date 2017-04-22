@@ -8,8 +8,8 @@ function Image(folder, name, filetype) {
   this.fileName= folder+name+filetype;
 }
 
-var previous = [];
-var secondToLast = [];
+// var previous = [];
+// var secondToLast = [];
 var current = [];
 var totalClicks = 0;
 
@@ -55,14 +55,13 @@ function randomArrayGenerator() {
 }
 
 
-var previous = [];
-var secondToLast = [];
+
 var current = [];
+var previous = [];
 
 function threeRandomPhotos() {
   randomArrayGenerator();
-  secondToLast = previous;
-  previous = current;
+  var previous = current;
 
   // randomArray.push(current);
   // randomArray.push(previous);
@@ -83,35 +82,67 @@ function threeRandomPhotos() {
   return current;
 }
 
-
+// parentNode.removeChild(image_x);
 
 function imageClicker(event) {
+  console.log(event.target);
   totalClicks++;
+  var img = document.createElement('img');
   console.log(totalClicks);
-  var img = event.target;
   var currentIndex = img.getAttribute('Current-Image-Index');
   current[currentIndex].clickCount++;
   console.log(current[currentIndex].clickCount);
+  createImages();
 }
 
 
 function createImages() {
   var current = threeRandomPhotos();
   var app = document.getElementById('app');
-  var img;
-  for (var i =0; i<current.length; i++) {
-
-    img = document.createElement('img');
+  var img = document.createElement('img');
+  console.log(current);
+  for (var i =0; i<3; i++) {
     img.setAttribute('class','images');
     console.log(img);
     img.setAttribute('src', current[i].fileName);
-
     img.setAttribute('Current-Image-Index', i);
     current[i].showCount++;
     console.log(current[i].showCount);
     console.log(current[i].clickCount);
-    img.addEventListener('click', imageClicker);
+
     app.appendChild(img);
+    console.log(img);
   }
 }
+
+// function showChart() {
+  // SHOW YOURSELF
+// }
+
+// var canvas = document.getElementById('');
+
+// var data = {
+//   datasets: [{
+//     data: [
+//     // this will be click values!
+//     ],
+//     backgroundColor: [
+//     // this will be different colors, matching up with the data property above
+//     ],
+//     label: 'clicks per item'
+//   }],
+//   labels: [
+//   //image names...
+//   ]
+// };
+//
+// var barChart = new Chart(ctx, {
+//   data: data,
+//   type: "bar",
+//   options: options,
+//   });
+
 createImages();
+var img = document.getElementsByClassName('images');
+console.log(img);
+img.addEventListener('click', imageClicker);
