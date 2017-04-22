@@ -115,17 +115,3 @@ function createImages() {
   }
 }
 createImages();
-
-
-
-
-
-
-// function handleClickCounter(event) {
-//
-// }
-
-
-// // createImage(imageArray[randomNumber()]);
-// // createImage(imageArray[randomNumber()]);
-// // createImage(imageArray[randomNumber()]);
