@@ -8,8 +8,7 @@ function Image(folder, name, filetype) {
   this.fileName= folder+name+filetype;
 }
 
-// var previous = [];
-// var secondToLast = [];
+var previous = [];
 var current = [];
 var totalClicks = 0;
 
@@ -36,9 +35,6 @@ var images = [
   new Image('img/','water-can','.jpg'),
   new Image('img/','wine-glass','.jpg'),
 ];
-  // this.appendImage = function() {
-  //   imageArray.push(this.fileName);
-  // };
 
 function randomNum() {
   return Math.floor(Math.random()*(images.length));
@@ -55,15 +51,8 @@ function randomArrayGenerator() {
   console.log(randomArray);
 }
 
-
-
-var previous = [];
-// var secondToLast = [];
-var current = [];
-
 function threeRandomPhotos() {
   randomArrayGenerator();
-  // secondToLast = previous;
   previous = current;
   current = [];
   // randomArray.push(current);
@@ -81,7 +70,7 @@ function threeRandomPhotos() {
   current.push(nextimage);
   // console.log(randomArray.length);
   images = images.concat(previous);
-  console.log('images',images.length,"previous",previous);
+  // console.log('images',images.length,"previous",previous);
   // console.log(randomArray);
   return current;
 }
@@ -89,12 +78,12 @@ function threeRandomPhotos() {
 // parentNode.removeChild(image_x);
 
 function imageClicker(event) {
-  console.log(event.target);
+  console.log('event.target'+event.target);
   totalClicks++;
   console.log(totalClicks);
   var currentIndex = event.target.getAttribute('Current-Image-Index');
   current[currentIndex].clickCount++;
-  console.log(current[currentIndex].clickCount);
+  console.log(current[currentIndex]);
 
   createImages();
 }
@@ -104,7 +93,7 @@ var app= document.getElementById('app');
 
 function createImages() {
   var current = threeRandomPhotos();
-  console.log('current',current);
+  // console.log('current',current);
   // app.textContent= '';
   for (var i =0; i<3; i++) {
     var imgArray = document.getElementsByClassName('images');
@@ -113,6 +102,8 @@ function createImages() {
     imgArray[i].src = current[i].fileName;
     imgArray[i].setAttribute('Current-Image-Index', i);
     current[i].showCount++;
+    // console.log(current[i].showCount);
+    // console.log(current[i].clickCount);
     // console.log('showcount'+current[i].showCount);
     // console.log('clickcount'+current[i].clickCount);
 
@@ -152,6 +143,6 @@ createImages();
 
 var imgArray = document.getElementsByClassName('images');
 for(var i=0; i < imgArray.length; i++){
-  console.log(imgArray);
+  // console.log(imgArray);
   imgArray[i].addEventListener('click', imageClicker);
 }
