@@ -1,12 +1,14 @@
 'use strict';
 //constructor function to log image information
 
+
 function Image(folder, name, filetype) {
   //this.shownPercent ??
   this.clickCount = 0;
   this.showCount = 0;
   this.fileName= folder+name+filetype;
 }
+
 
 var previous = [];
 var current = [];
@@ -35,6 +37,7 @@ var images = [
   new Image('img/','water-can','.jpg'),
   new Image('img/','wine-glass','.jpg'),
 ];
+
 
 function randomNum() {
   return Math.floor(Math.random()*(images.length));
@@ -94,6 +97,7 @@ function imageClicker(event) {
 }
 
 
+
 var app= document.getElementById('app');
 
 function createImages() {
@@ -151,3 +155,33 @@ for(var i=0; i < imgArray.length; i++){
   // console.log(imgArray);
   imgArray[i].addEventListener('click', imageClicker);
 }
+  //if(image1==image2 || image1==image3 || image2==image3) {
+
+  //}
+}
+
+
+// Tuesday's lab...
+
+var ctx = document.getElementById('barchart').getContext('2d');
+
+var data = {
+  datasets: [{
+    data: [
+    // this will be click values!
+    ],
+    backgroundColor: [
+    // this will be different colors, matching up with the data property above
+    ],
+    label: 'clicks per item'
+  }],
+  labels: [
+  //image names...
+  ]
+};
+
+var barChart = new Chart(ctx, {
+  data: data,
+  type: 'bar',
+  // options: I will refer to manual considering options...
+});

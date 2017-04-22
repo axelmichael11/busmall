@@ -38,3 +38,50 @@ perhaps a random button generator...
 create an appending function....
 for loop that goes through the array of images...
 yikes! These pictures will create buttons!
+
+
+Tuesday's Chart Plan..
+Today's lab seemed pretty self explanatory... I would need to RTFM, or read the manual at www.chartjs.org to really get the gist of the kind of graph I need to display...
+i believe put this in a link tab at the top of my page
+https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js
+
+NOTE: there is also an installation guide at the top as well in prompt? I am not sure if I will need to do this but I will definitely look towards this when routing data.
+
+installation...
+
+npm
+
+npm install chart.js --save
+
+
+Reading the manual, I will need to display the labels, colors, and data as property/values as part of the variable data...
+
+structure like this...
+
+var data = {
+  datasets: [{
+    data: [
+    // this will be click values!
+    ],
+    backgroundColor: [
+    // this will be different colors, matching up with the data property above
+    ],
+    label: 'clicks per item'
+  }],
+  labels: [
+  //image names...
+  ]
+};
+
+var barChart = new Chart(ctx, {
+  data: data,
+  type: "bar",
+  options: options,
+  });
+
+once the chart is set up, I will put this into an element on my index page!
+
+var ctx = document.getElementById("myChart").getContext("2d");
+
+
+this structure is really good to know, as I will simply push my click data to the data array property. This helps me organize my output for when I get to my even click handler...
