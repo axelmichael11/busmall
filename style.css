@@ -10,16 +10,25 @@ box-sizing: border-box;
 html, body {
   height:100%;
   width:100%;
-  background: beige;
+  background: lightblue;
 }
 
 
 .images {
-  width:200px;
-  height:200px;
+  width:400px;
+  height:400px;
+  display:inline-block;
+}
+div {
+
 }
 
 .app div {
-  display:inline;
-  width: calc(100%/ 3);
+  /*display:inline;*/
+  /*width: calc(100%/ 3);*/
+}
+
+.app canvas {
+  width: 75%;
+  height: 75%;
 }
