@@ -4,22 +4,59 @@ margin: 0;
 padding: 0;
 width: 100%;
 box-sizing: border-box;
+border: 2px dashed blue;
 }
 
 
 html, body {
   height:100%;
   width:100%;
-  background: beige;
+  background: #80E9B5;
+  border: 2px dashed green;
 }
 
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  font-size: 100px;
+}
 
 .images {
+  /*display:inline-block;*/
+  /*padding: auto 30px;*/
+  /*margin: auto 40px;*/
+  text-align: center;
   width:200px;
   height:200px;
+  /*display:inline-block;*/
 }
 
-.app div {
-  display:inline;
-  width: calc(100%/ 3);
+div {
+  /*text-align: justify;*/
+  position:inline-block;
+  margin-left: 0 auto;
+  /*border: 2px dashed red;*/
+  /*margin:20px auto;*/
+}
+div .image-wrap {
+  /*margin: 20px auto;*/
+  background-color: rgba(31, 176, 209, 1);
+  width:25%;
+  /*position: absolute;*/
+}
+
+div #app {
+  /*position: relative;*/
+  display:inline-block;
+  text-align: justify;
+  height:40%;
+  /*width: calc(100%/ 3);*/
+}
+
+.app canvas {
+  border: 4px dashed purple;
+  width: 75%;
+  height: 75%;
+  margin: 20px auto;
+  padding: 0 auto;
 }
