@@ -22,20 +22,15 @@ var showCount = [];
 
 var previous = [];
 var current = [];
-var totalClicks = 23;
+var totalClicks = 0;
 
 //trial and error with this local storage thing...
 
-var messageContainer;
 
 // local storage object...!
 var dataStorage= {
   title: 'Data on Images',
   dataForLocal: [],
-  // a function inside to call
-  // percentClicked: function() {
-  //   return parseInt(this.dataForLocal.clickCount)/parseInt(this.dataForLocal.showCount);
-  // },
 };
 
 try {
