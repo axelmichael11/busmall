@@ -67,11 +67,20 @@ div .image-wrap:hover {
   /*text-align:center;*/
   /*width: calc(100%/ 3);*/
   text-align: justify;
-  opacity: .25;
+  /*opacity: .25;*/
+  transition: all 0.5s linear;
+  border-radius: 50%;
+  background-color:#80E9B5;
 }
 
 .images:hover {
-  opacity: .25;
+  /*opacity: .25;*/
+  transition: all 0.5s linear;
+  border-radius: 50%;
+}
+
+.images:active {
+  transition:
 }
 
 .app canvas {
