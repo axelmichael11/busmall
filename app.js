@@ -6,18 +6,38 @@ function Image(folder, name, filetype) {
   //this.shownPercent ??
   this.clickCount = 0;
   this.showCount = 0;
+  //I am trying to give this a percent clicked... bleh
+  // this.percentClicked = function() {
+  //   return parseInt(this.clickCount)/parseInt(this.showCount);
+  // };
+  // this.percent = this.percentClicked();
+  // this.recommended = if (this.clickCount/this.showCount>)
   this.fileName = folder+name+filetype;
   this.name = name;
   this.src =  folder+name+filetype;
 }
-
 var names =[];
 var clickCount = [];
 var showCount = [];
 
 var previous = [];
 var current = [];
-var totalClicks = 23;
+var totalClicks = 0;
+
+//trial and error with this local storage thing...
+
+
+// local storage object...!
+var dataStorage= {
+  title: 'Data on Images',
+  dataForLocal: [],
+};
+
+try {
+  dataStorage = JSON.parse(localStorage.dataStorage);
+} catch (error) {
+  console.log('error while trying to retrieve data...');
+}
 
 //**************
 var images = [
@@ -90,24 +110,31 @@ function threeRandomPhotos() {
 // parentNode.removeChild(image_x);
 
 function imageClicker(event) {
-  console.log('event.target'+event.target);
+  // console.log('event.target'+event.target);
   totalClicks++;
   console.log(totalClicks);
   var currentIndex = event.target.getAttribute('Current-Image-Index');
   current[currentIndex].clickCount++;
-  console.log(current[currentIndex]);
+  // console.log(current[currentIndex]);
   var app = document.getElementById('app');
+  console.log(current[currentIndex]);
+
+  dataStorage.dataForLocal.push(current[currentIndex]);
+  try {
+    localStorage.dataStorage = JSON.stringify(dataStorage);
+  } catch (error) {
+    console.log('something went wrong', error);
+  }
+
   if (totalClicks===25) {
     app.textContent = '';
     showChart();
+    createDataHeader();
+    createLocalData();
   } else {
     createImages();
   }
 }
-
-
-
-
 
 function showChart() {
   var app = document.getElementById('app');
@@ -126,8 +153,6 @@ function showChart() {
     names.push(images[i].name);
     clickCount.push(images[i].clickCount);
   }
-
-
   var data = {
     labels: names,
     datasets: [
@@ -144,12 +169,6 @@ function showChart() {
       },
     ],
   };
-  // images.onload = function() {
-  //   var ctx = document.getElementById('canvas').getContext('2d');
-  //   for (var i=0; i<images.length; i++){
-  //     fillPattern = ctx.createPattern(images[i], 'repeat');
-  //   }
-  // };
   new Chart(ctx, {
     type: 'bar',
     data: data,
@@ -157,11 +176,6 @@ function showChart() {
     options:{
       responsive: true,
       maintainAspectRatio: true
-      // scales: {
-      //   yAxes: [{
-      //     stacked: true
-      //   }]
-      // }
     }
   });
 }
@@ -174,24 +188,75 @@ console.log(showCount);
 console.log(names);
 console.log(clickCount);
 
+//*****************//*****************//*****************
+function createDataHeader(){
+  var table = document.getElementById('localapp');
+  var tableRow = document.createElement('tr');
+  table.appendChild(tableRow);
+  var dataImage;
+  //creating titles...
+  var tableRow = document.createElement('tr');
+  tableRow.setAttribute('id','data-titles');
+  var hitem = document.createElement('th');
+  hitem.textContent= 'Item';
+  tableRow.appendChild(hitem);
+  var hviews = document.createElement('th');
+  hviews.textContent= 'Views';
+  tableRow.appendChild(hviews);
+  var hclicks = document.createElement('th');
+  hclicks.textContent= 'Clicks';
+  tableRow.appendChild(hclicks);
+  var percent = document.createElement('th');
+  percent.textContent= '% of Clicks When Viewed';
+  tableRow.appendChild(percent);
+  var rec = document.createElement('th');
+  rec.textContent= 'Recommended?';
+  tableRow.appendChild(rec);
+  table.appendChild(tableRow);
+}
 
-// console.log(showCount, names, clickCount);
+function createLocalData() {
+  var table = document.getElementById('localapp');
+  // var percenter = function() {
+  //
+  // }
+  for (var i = 0; i <dataStorage.dataForLocal.length; i++) {
+    var tr = document.createElement('tr');
+
+    var item = document.createElement('td');
+    item.textContent = dataStorage.dataForLocal[i].name;
+
+    var views = document.createElement('td');
+    views.textContent = dataStorage.dataForLocal[i].showCount;
+
+    var clicks = document.createElement('td');
+    clicks.textContent = dataStorage.dataForLocal[i].clickCount;
+
+    var percent = document.createElement('td');
+    percent.textContent =dataStorage.dataForLocal[i].clickCount/dataStorage.dataForLocal[i].showCount;
+    var rec = document.createElement('td');
+    if (percent.textContent<(1/5)) {
+      rec.textContent = 'NO';
+    } else {
+      rec.textContent = 'YES';
+    }
+    tr.appendChild(item);
+    tr.appendChild(views);
+    tr.appendChild(clicks);
+    tr.appendChild(percent);
+    tr.appendChild(rec);
+    table.appendChild(tr);
+
+  }
+}
 
 
-  // var data = {
-  //   datasets: [{
-  //     data: [
-  //     // this will be click values!
-  //     ],
-  //     backgroundColor: [
-     // this will be different colors, matching up with the data property above
-  //     ],
-  //     label: 'clicks per item'
-  //   }],
-  //   labels: [
-  //   //image names...
-  //   ]
-  // };
+  // for(var i=0; i<dataStorage.localData.length; i++){
+  //   dataImage = document.createElement('li');
+  //   dataImage.textContent = dataStorage.data[0];
+  //   ul.appendChild(messageLi);
+  //
+  // }
 
 
 
@@ -220,30 +285,7 @@ function createImages() {
   }
 }
 
-// var data = {
-//   datasets: [{
-//     data: [
-//     // this will be click values!
-//     ],
-//     backgroundColor: [
-   // this will be different colors, matching up with the data property above
-//     ],
-//     label: 'clicks per item'
-//   }],
-//   labels: [
-//   //image names...
-//   ]
-// };
-//
-// var barChart = new Chart(ctx, {
-//   data: data,
-//   type: "bar",
-//   options: options,
-//   });
-
 createImages();
-
-
 var imgArray = document.getElementsByClassName('images');
 for(var i=0; i < imgArray.length; i++){
   // console.log(imgArray);
