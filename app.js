@@ -6,6 +6,12 @@ function Image(folder, name, filetype) {
   //this.shownPercent ??
   this.clickCount = 0;
   this.showCount = 0;
+  //I am trying to give this a percent clicked... bleh
+  // this.percentClicked = function() {
+  //   return parseInt(this.clickCount)/parseInt(this.showCount);
+  // };
+  // this.percent = this.percentClicked();
+  // this.recommended = if (this.clickCount/this.showCount>)
   this.fileName = folder+name+filetype;
   this.name = name;
   this.src =  folder+name+filetype;
@@ -22,10 +28,14 @@ var totalClicks = 23;
 
 var messageContainer;
 
-// local storage array?
+// local storage object...!
 var dataStorage= {
   title: 'Data on Images',
-  localData: [],
+  dataForLocal: [],
+  // a function inside to call
+  // percentClicked: function() {
+  //   return parseInt(this.dataForLocal.clickCount)/parseInt(this.dataForLocal.showCount);
+  // },
 };
 
 try {
@@ -113,8 +123,8 @@ function imageClicker(event) {
   // console.log(current[currentIndex]);
   var app = document.getElementById('app');
   console.log(current[currentIndex]);
-  dataStorage.localData.push(current[currentIndex]);
 
+  dataStorage.dataForLocal.push(current[currentIndex]);
   try {
     localStorage.dataStorage = JSON.stringify(dataStorage);
   } catch (error) {
@@ -124,15 +134,12 @@ function imageClicker(event) {
   if (totalClicks===25) {
     app.textContent = '';
     showChart();
-    createDataChart();
+    createDataHeader();
+    createLocalData();
   } else {
     createImages();
   }
 }
-
-
-
-
 
 function showChart() {
   var app = document.getElementById('app');
@@ -186,23 +193,76 @@ console.log(showCount);
 console.log(names);
 console.log(clickCount);
 
-function renderDataContainer() {
-  messageContainer = document.createElement('ul');
-  app.appendChild(messageContainer);
+//*****************//*****************//*****************
+function createDataHeader(){
+  var table = document.getElementById('localapp');
+  var tableRow = document.createElement('tr');
+  table.appendChild(tableRow);
+  var dataImage;
+  //creating titles...
+  var tableRow = document.createElement('tr');
+  tableRow.setAttribute('id','data-titles');
+  var hitem = document.createElement('th');
+  hitem.textContent= 'Item';
+  tableRow.appendChild(hitem);
+  var hviews = document.createElement('th');
+  hviews.textContent= 'Views';
+  tableRow.appendChild(hviews);
+  var hclicks = document.createElement('th');
+  hclicks.textContent= 'Clicks';
+  tableRow.appendChild(hclicks);
+  var percent = document.createElement('th');
+  percent.textContent= '% of Clicks When Viewed';
+  tableRow.appendChild(percent);
+  var rec = document.createElement('th');
+  rec.textContent= 'Recommended?';
+  tableRow.appendChild(rec);
+  table.appendChild(tableRow);
 }
 
-function createDataChart(){
+function createLocalData() {
   var table = document.getElementById('localapp');
-  var ul = document.createElement('ul');
-  table.appendChild(ul);
-  var dataImage;
-  for(var i=0; i<dataStorage.localData.length; i++){
-    dataImage = document.createElement('li');
-    dataImage.textContent = dataStorage.data[0];
-    ul.appendChild(messageLi);
+  // var percenter = function() {
+  //
+  // }
+  for (var i = 0; i <dataStorage.dataForLocal.length; i++) {
+    var tr = document.createElement('tr');
+
+    var item = document.createElement('td');
+    item.textContent = dataStorage.dataForLocal[i].name;
+
+    var views = document.createElement('td');
+    views.textContent = dataStorage.dataForLocal[i].showCount;
+
+    var clicks = document.createElement('td');
+    clicks.textContent = dataStorage.dataForLocal[i].clickCount;
+
+    var percent = document.createElement('td');
+    percent.textContent =dataStorage.dataForLocal[i].clickCount/dataStorage.dataForLocal[i].showCount;
+    var rec = document.createElement('td');
+    if (percent.textContent<(1/5)) {
+      rec.textContent = 'NO';
+    } else {
+      rec.textContent = 'YES';
+    }
+    tr.appendChild(item);
+    tr.appendChild(views);
+    tr.appendChild(clicks);
+    tr.appendChild(percent);
+    tr.appendChild(rec);
+    table.appendChild(tr);
 
   }
 }
+
+
+  // for(var i=0; i<dataStorage.localData.length; i++){
+  //   dataImage = document.createElement('li');
+  //   dataImage.textContent = dataStorage.data[0];
+  //   ul.appendChild(messageLi);
+  //
+  // }
+
 
 
 

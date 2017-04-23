@@ -60,3 +60,17 @@ div #app {
   margin: 20px auto;
   padding: 0 auto;
 }
+
+table {
+  margin-top: 30px;
+  font-family: 'Montserrat', sans-serif;
+  border: 2px solid rgba(31, 176, 209, 1);
+}
+
+table tr th {
+  border: 4px solid rgba(31, 176, 209, 1);
+}
+
+table tr td {
+  border: 2px solid rgba(31, 176, 209, 1);
+}
