@@ -10,14 +10,15 @@ box-sizing: border-box;
 html, body {
   height:100%;
   width:100%;
-  background: lightblue;
+  background: #80E9B5;
 }
 
 
 .images {
   width:400px;
   height:400px;
-  display:inline-block;
+  /*display:inline-block;*/
+  float:center;
 }
 div {
 
@@ -31,4 +32,6 @@ div {
 .app canvas {
   width: 75%;
   height: 75%;
+  margin: 0 auto;
+  padding: 0 auto;
 }

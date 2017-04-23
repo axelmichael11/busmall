@@ -17,7 +17,7 @@ var showCount = [];
 
 var previous = [];
 var current = [];
-var totalClicks = 24;
+var totalClicks = 23;
 
 //**************
 var images = [
@@ -105,11 +105,15 @@ function imageClicker(event) {
   }
 }
 
+
+
+
+
 function showChart() {
   var app = document.getElementById('app');
   var canvas = document.createElement('canvas');
-  canvas.width = '960';
-  canvas.height = '500';
+  canvas.width = '260';
+  canvas.height = '200';
   app.appendChild(canvas);
   //filled my example rectangle!
 
@@ -148,7 +152,7 @@ function showChart() {
   new Chart(ctx, {
     type: 'bar',
     data: data,
-    backgroundColor: fillPattern,
+    backgroundColor: 'rgba(75,192,192,0.4)',
     options:{
       scales: {
         yAxes: [{
@@ -158,6 +162,9 @@ function showChart() {
     }
   });
 }
+
+
+
 
 
 console.log(showCount);
