@@ -112,12 +112,12 @@ function imageClicker(event) {
 function showChart() {
   var app = document.getElementById('app');
   var canvas = document.createElement('canvas');
-  canvas.width = '260';
-  canvas.height = '200';
   app.appendChild(canvas);
   //filled my example rectangle!
 
   var ctx = canvas.getContext('2d');
+  ctx.width = '160';
+  ctx.height = '100';
   ctx.fillRect(0,0,50,50);
   //for loop to create arrays for data. I need the image name for labels, click counts, and shown counts...
   for (var i=0 ; i <images.length; i++) {
@@ -135,30 +135,33 @@ function showChart() {
         // this will be click values!
         data: clickCount,
         label: 'Image Click Count',
+        backgroundColor: 'rgba(31, 176, 209, 1)',
       },
       {
         data: showCount,
         label: 'Image Show Count',
+        backgroundColor: 'rgba(28, 98, 15, 1)',
       },
     ],
   };
-  var fillPattern;
-  images.onload = function() {
-    var ctx = document.getElementById('canvas').getContext('2d');
-    for (var i=0; i<images.length; i++){
-      fillPattern = ctx.createPattern(images[i], 'repeat');
-    }
-  };
+  // images.onload = function() {
+  //   var ctx = document.getElementById('canvas').getContext('2d');
+  //   for (var i=0; i<images.length; i++){
+  //     fillPattern = ctx.createPattern(images[i], 'repeat');
+  //   }
+  // };
   new Chart(ctx, {
     type: 'bar',
     data: data,
-    backgroundColor: 'rgba(75,192,192,0.4)',
+    borderColor: 'rgba(75,192,192,0.4)',
     options:{
-      scales: {
-        yAxes: [{
-          stacked: true
-        }]
-      }
+      responsive: true,
+      maintainAspectRatio: true
+      // scales: {
+      //   yAxes: [{
+      //     stacked: true
+      //   }]
+      // }
     }
   });
 }
