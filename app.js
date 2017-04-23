@@ -251,13 +251,6 @@ function createLocalData() {
 }
 
 
-  // for(var i=0; i<dataStorage.localData.length; i++){
-  //   dataImage = document.createElement('li');
-  //   dataImage.textContent = dataStorage.data[0];
-  //   ul.appendChild(messageLi);
-  //
-  // }
-
 
 
 
