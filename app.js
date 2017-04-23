@@ -10,7 +10,6 @@ function Image(folder, name, filetype) {
   this.name = name;
   this.src =  folder+name+filetype;
 }
-
 var names =[];
 var clickCount = [];
 var showCount = [];
@@ -18,6 +17,22 @@ var showCount = [];
 var previous = [];
 var current = [];
 var totalClicks = 23;
+
+//trial and error with this local storage thing...
+
+var messageContainer;
+
+// local storage array?
+var dataStorage= {
+  title: 'Data on Images',
+  localData: [],
+};
+
+try {
+  dataStorage = JSON.parse(localStorage.dataStorage);
+} catch (error) {
+  console.log('error while trying to retrieve data...');
+}
 
 //**************
 var images = [
@@ -90,16 +105,26 @@ function threeRandomPhotos() {
 // parentNode.removeChild(image_x);
 
 function imageClicker(event) {
-  console.log('event.target'+event.target);
+  // console.log('event.target'+event.target);
   totalClicks++;
   console.log(totalClicks);
   var currentIndex = event.target.getAttribute('Current-Image-Index');
   current[currentIndex].clickCount++;
-  console.log(current[currentIndex]);
+  // console.log(current[currentIndex]);
   var app = document.getElementById('app');
+  console.log(current[currentIndex]);
+  dataStorage.localData.push(current[currentIndex]);
+
+  try {
+    localStorage.dataStorage = JSON.stringify(dataStorage);
+  } catch (error) {
+    console.log('something went wrong', error);
+  }
+
   if (totalClicks===25) {
     app.textContent = '';
     showChart();
+    createDataChart();
   } else {
     createImages();
   }
@@ -126,8 +151,6 @@ function showChart() {
     names.push(images[i].name);
     clickCount.push(images[i].clickCount);
   }
-
-
   var data = {
     labels: names,
     datasets: [
@@ -144,12 +167,6 @@ function showChart() {
       },
     ],
   };
-  // images.onload = function() {
-  //   var ctx = document.getElementById('canvas').getContext('2d');
-  //   for (var i=0; i<images.length; i++){
-  //     fillPattern = ctx.createPattern(images[i], 'repeat');
-  //   }
-  // };
   new Chart(ctx, {
     type: 'bar',
     data: data,
@@ -157,11 +174,6 @@ function showChart() {
     options:{
       responsive: true,
       maintainAspectRatio: true
-      // scales: {
-      //   yAxes: [{
-      //     stacked: true
-      //   }]
-      // }
     }
   });
 }
@@ -174,25 +186,23 @@ console.log(showCount);
 console.log(names);
 console.log(clickCount);
 
+function renderDataContainer() {
+  messageContainer = document.createElement('ul');
+  app.appendChild(messageContainer);
+}
 
-// console.log(showCount, names, clickCount);
+function createDataChart(){
+  var table = document.getElementById('localapp');
+  var ul = document.createElement('ul');
+  table.appendChild(ul);
+  var dataImage;
+  for(var i=0; i<dataStorage.localData.length; i++){
+    dataImage = document.createElement('li');
+    dataImage.textContent = dataStorage.data[0];
+    ul.appendChild(messageLi);
 
-
-  // var data = {
-  //   datasets: [{
-  //     data: [
-  //     // this will be click values!
-  //     ],
-  //     backgroundColor: [
-     // this will be different colors, matching up with the data property above
-  //     ],
-  //     label: 'clicks per item'
-  //   }],
-  //   labels: [
-  //   //image names...
-  //   ]
-  // };
-
+  }
+}
 
 
 
@@ -220,30 +230,7 @@ function createImages() {
   }
 }
 
-// var data = {
-//   datasets: [{
-//     data: [
-//     // this will be click values!
-//     ],
-//     backgroundColor: [
-   // this will be different colors, matching up with the data property above
-//     ],
-//     label: 'clicks per item'
-//   }],
-//   labels: [
-//   //image names...
-//   ]
-// };
-//
-// var barChart = new Chart(ctx, {
-//   data: data,
-//   type: "bar",
-//   options: options,
-//   });
-
 createImages();
-
-
 var imgArray = document.getElementsByClassName('images');
 for(var i=0; i < imgArray.length; i++){
   // console.log(imgArray);
