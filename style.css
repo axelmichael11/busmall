@@ -12,7 +12,7 @@ html, body {
   height:100%;
   width:100%;
   background: #80E9B5;
-  border: 2px dashed green;
+  /*border: 2px dashed green;*/
 }
 
 h1 {
