@@ -4,7 +4,7 @@ margin: 0;
 padding: 0;
 width: 100%;
 box-sizing: border-box;
-border: 2px dashed blue;
+/*border: 2px dashed blue;*/
 }
 
 
@@ -19,6 +19,26 @@ h1 {
   font-family: 'Montserrat', sans-serif;
   text-align: center;
   font-size: 100px;
+}
+
+@keyframes bounce {
+  25% {
+    transform:translateY(10px);
+  }
+  50% {
+    transform:translateY(-10px);
+  }
+  75%  {
+    transform:translateY(10px);
+  }
+  100% {
+    transform:translateY(-5px);
+  }
+}
+
+
+h1:hover {
+  animation: bounce 3s ease;
 }
 
 div {
@@ -50,7 +70,7 @@ div .image-wrap {
   display: inline-block;
   width: 20%;
   height: 225px;
-  border:red 2px dashed;
+  /*border:red 2px dashed;*/
   /*text-align: center;*/
   float:center;
   margin: 30px 80px;
@@ -67,11 +87,22 @@ div .image-wrap:hover {
   /*text-align:center;*/
   /*width: calc(100%/ 3);*/
   text-align: justify;
-  opacity: .25;
+  /*opacity: .25;*/
+  transition: all 0.5s linear;
+  border-radius: 50%;
+  background-color:#80E9B5;
 }
 
 .images:hover {
-  opacity: .25;
+  /*opacity: .25;*/
+  transition: all 0.5s linear;
+  border-radius: 50%;
+  /*transform: translateY(20px);*/
+  animation: bounce 1s ease;
+}
+
+.images:active {
+  transition:
 }
 
 .app canvas {
